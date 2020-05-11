@@ -1,6 +1,7 @@
 #include <string>
 #include <math.h>
 #include "format.h"
+#include <stdexcept>
 
 using std::string;
 using std::to_string;
@@ -9,6 +10,7 @@ using std::to_string;
 // INPUT: Long int measuring seconds
 // OUTPUT: HH:MM:SS
 string Format::ElapsedTime(long seconds) { 
+    try{
     int days_rem, hours, mins, secs;
     string s_hours, s_mins, s_secs;
     days_rem = seconds%86400; //Incase input is over a day (24hrs or 86400 seconds), we dump them here
@@ -19,4 +21,6 @@ string Format::ElapsedTime(long seconds) {
     (mins<10)?s_mins = "0"+to_string(mins):s_mins=to_string(mins);
     (secs<10)?s_secs = "0"+to_string(secs):s_secs=to_string(secs);
     return s_hours+":"+s_mins+":"+s_secs;
+    }
+    catch(std::invalid_argument){return 0;}
  }
