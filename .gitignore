@@ -1,0 +1,7 @@
+monitor
+a.out
+settings.json
+build/*
+*.o
+*.json
+.clang-format
