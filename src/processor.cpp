@@ -5,7 +5,7 @@
 
 #include "linux_parser.h"
 
-// TODO: Return the aggregate CPU utilization
+// Returns the aggregate CPU utilization
 double Processor::Utilization() {
   double utilization{0};
   long active_ticks = LinuxParser::ActiveJiffies();

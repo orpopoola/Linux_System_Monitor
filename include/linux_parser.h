@@ -27,7 +27,7 @@ int RunningProcesses();
 std::string OperatingSystem();
 std::string Kernel();
 
-// CPU
+// CPU 0-end
 enum CPUStates {
   kUser_ = 0,
   kNice_,
