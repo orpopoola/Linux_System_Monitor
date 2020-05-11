@@ -49,6 +49,7 @@ P getValueOfFile(std::string const &filename) {
 template <typename Z> //Template to check stol is not operating on an invalid argument
 Z convertStr(string x) {
   Z value;
+  if (x.length()==0){x="0";}
   try {
     value = stol(x);
   } catch (const std::invalid_argument) {
@@ -60,6 +61,7 @@ Z convertStr(string x) {
 template <typename Z> //Template to check stoi is not operating on an invalid argument
 Z convertStri(string x) {
   Z value;
+  if (x.length()==0){x="0";}
   try {
     value = stoi(x);
   } catch (const std::invalid_argument) {
@@ -115,7 +117,7 @@ vector<int> LinuxParser::Pids() {
       // Is every character of the name a digit?
       string filename(file->d_name);
       if (std::all_of(filename.begin(), filename.end(), isdigit)) {
-        int pid = convertStr<int>(filename);
+        int pid = convertStri<int>(filename);
         pids.push_back(pid);
       }
     }
@@ -223,7 +225,7 @@ string LinuxParser::Ram(int pid) {
         if (key ==
             "VmSize:") {  // most processes have VmData=0, so I did not use it
                           // because that provides little information
-          return to_string(convertStr<int>(value) / 1024);
+          return to_string(convertStri<int>(value) / 1024);
         }
       }
     }

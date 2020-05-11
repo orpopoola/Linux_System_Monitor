@@ -13,6 +13,18 @@ using std::string;
 using std::to_string;
 using std::vector;
 
+template <typename Z> //Template to check stol is not operating on an invalid argument
+Z convertStr(string x) {
+  Z value;
+  if (x.length()==0){x="0";}
+  try {
+    value = stol(x);
+  } catch (const std::invalid_argument) {
+    value = 0;
+  }
+  return value;
+}
+
 Process::Process(int pid) : pid_(pid) {}
 // Returns this process's ID
 int Process::Pid() { return pid_; }
@@ -38,5 +50,5 @@ long int Process::UpTime() { return LinuxParser::UpTime(pid_); }
 
 //  Overloada th "less than" comparison operator for Process objects
 bool Process::operator<(Process const& a) const {
-  return stol(LinuxParser::Ram(pid_)) > stol(LinuxParser::Ram(a.pid_));
+  return convertStr<long>(LinuxParser::Ram(pid_)) > convertStr<long>(LinuxParser::Ram(a.pid_));
 }
